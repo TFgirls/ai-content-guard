@@ -4,6 +4,8 @@
 
 面向电商、内容平台的审核场景：**不只判断「有没有问题」，还要给出合规改写，并能量化效果。**
 
+![审核结果界面](assets/preview.png)
+
 ---
 
 ## 链路
@@ -33,6 +35,11 @@ python -m src.evaluate --with-rewrite            # 规则 + LLM + 改写效果�
 
 streamlit run app.py
 ```
+
+> 必须用 `streamlit run` 启动。直接 `python app.py` 会被启动守卫拦下并给出提示——
+> Streamlit 在 bare mode 下 `st.stop()` 不生效，会抛出与真实原因无关的 `NoneType` 报错。
+
+首页有三张样图可一键试用，分别对应「规则命中 / 应当放过 / 规则漏检」三种情况。
 
 ## 评测结果
 

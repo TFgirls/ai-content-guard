@@ -1,0 +1,16 @@
+# 虚拟环境
+venv/
+.venv/
+
+# 密钥
+.env
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# 操作系统
+.DS_Store
+Thumbs.db

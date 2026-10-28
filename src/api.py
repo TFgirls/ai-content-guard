@@ -120,6 +120,13 @@ def review(file: UploadFile = File(...)):
             for r in a.trace.rounds
         ]
 
+    if a.trace:
+        summary = a.trace.summary()
+    elif a.undetermined:
+        summary = "未执行：OCR 未识别到文字，无法判定"
+    else:
+        summary = "未触发改写：判定未达违规门槛"
+
     return ReviewOut(
         status=a.status,
         risk_level=j.risk_level if j else "unknown",
@@ -136,6 +143,6 @@ def review(file: UploadFile = File(...)):
         ],
         needs_review=a.needs_review,
         review_reasons=a.review_reasons,
-        agent_summary=a.trace.summary() if a.trace else "",
+        agent_summary=summary,
         agent_rounds=rounds,
     )

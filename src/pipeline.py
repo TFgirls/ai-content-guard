@@ -124,7 +124,9 @@ def analyze(image_bytes: bytes, use_agent: bool = True) -> Analysis:
         a.changes = first.changes if first else []
         a.rewrite_ok = bool(first and first.ok and first.rewritten)
         a.rewrite_error = (first.error if first else "") or ""
-        a.residual_hits = trace.rounds[-1].residual if trace.rounds else []
+        # residual_hits 的语义是「改写之后仍残留」。没真改写时它必须是空，
+        # 否则调用方会把「原文的命中」误读成「改写不彻底」。
+        a.residual_hits = trace.rounds[-1].residual if (trace.rounds and a.rewrite_ok) else []
         return a
 
     out = rewrite(a.ocr_text, a.judgment.categories, a.rule_hits)

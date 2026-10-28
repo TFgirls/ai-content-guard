@@ -95,41 +95,64 @@ def rewrite(text: str, categories: List[str], hits: List[dict] | None = None) ->
         return RewriteOutcome(text, ["未配置 DEEPSEEK_API_KEY，已跳过改写"], ok=False, error="missing_api_key")
 
     words = [h.get("evidence") or h["match"] for h in (hits or [])]
-    try:
-        resp = _get_client().chat.completions.create(
-            model=DEEPSEEK_MODEL,
-            messages=[
-                {
-                    "role": "user",
-                    "content": _PROMPT.format(
-                        text=text,
-                        cats="、".join(categories) or "违规表述",
-                        words="、".join(words) or "（未给出具体词，请自行判断）",
-                    ),
-                }
-            ],
-            temperature=0.3,
-            response_format={"type": "json_object"},
-        )
-        data = loads(resp.choices[0].message.content)
-        result = RewriteResult(**data)
-        out = (result.rewritten or "").strip()
+    last_err: Exception | None = None
 
-        if not out:
-            return RewriteOutcome(text, ["改写结果为空，保留原文"], ok=False, error="empty_result")
-        # 长度约束：改写把 100 字变成 300 字或砍成 10 字，都视为异常
-        ratio = len(out) / max(len(text), 1)
-        if not (0.3 <= ratio <= 3.0):
-            logger.warning("改写长度异常：原文 %d 字 -> 改写 %d 字", len(text), len(out))
-            return RewriteOutcome(out, result.changes + [f"改写长度异常（{ratio:.1f} 倍），请人工确认"], ok=True)
+    # 模型偶发返回畸形 JSON（实测约 1/10 概率），重试一次通常就能恢复。
+    # 只对解析失败重试；网络错误重试意义不大，直接降级。
+    for attempt in (1, 2):
+        try:
+            return _call_once(text, categories, words)
+        except json.JSONDecodeError as e:
+            last_err = e
+            logger.warning("改写返回非 JSON（第 %d 次尝试）：%s", attempt, e)
+            continue
+        except Exception as e:  # 网络/配额/鉴权失败
+            logger.warning("改写调用失败：%s: %s", type(e).__name__, e)
+            return RewriteOutcome(
+                text,
+                [f"改写调用失败（{type(e).__name__}），返回原文"],
+                ok=False,
+                error=f"{type(e).__name__}: {e}",
+            )
 
-        return RewriteOutcome(out, result.changes, ok=True)
+    return RewriteOutcome(
+        text,
+        ["改写返回内容无法解析，返回原文"],
+        ok=False,
+        error=f"JSONDecodeError: {last_err}",
+    )
 
-    except Exception as e:  # 网络/配额/解析失败都不应阻断主流程
-        logger.warning("改写调用失败：%s: %s", type(e).__name__, e)
+
+def _call_once(text: str, categories: List[str], words: List[str]) -> RewriteOutcome:
+    """单次调用并解析。解析失败抛 JSONDecodeError，交给上层决定是否重试。"""
+    resp = _get_client().chat.completions.create(
+        model=DEEPSEEK_MODEL,
+        messages=[
+            {
+                "role": "user",
+                "content": _PROMPT.format(
+                    text=text,
+                    cats="、".join(categories) or "违规表述",
+                    words="、".join(words) or "（未给出具体词，请自行判断）",
+                ),
+            }
+        ],
+        temperature=0.3,
+        response_format={"type": "json_object"},
+    )
+    data = loads(resp.choices[0].message.content)
+    result = RewriteResult(**data)
+    out = (result.rewritten or "").strip()
+
+    if not out:
+        return RewriteOutcome(text, ["改写结果为空，保留原文"], ok=False, error="empty_result")
+
+    # 长度约束：改写把 100 字变成 300 字或砍成 10 字，都视为异常
+    ratio = len(out) / max(len(text), 1)
+    if not (0.3 <= ratio <= 3.0):
+        logger.warning("改写长度异常：原文 %d 字 -> 改写 %d 字", len(text), len(out))
         return RewriteOutcome(
-            text,
-            [f"改写调用失败（{type(e).__name__}），返回原文"],
-            ok=False,
-            error=f"{type(e).__name__}: {e}",
+            out, result.changes + [f"改写长度异常（{ratio:.1f} 倍），请人工确认"], ok=True
         )
+
+    return RewriteOutcome(out, result.changes, ok=True)

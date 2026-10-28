@@ -35,8 +35,15 @@ def _load_labels(path: Path = EVAL_CSV):
     return out
 
 
-def _predict(img_path: Path, use_llm: bool = True):
-    a = detect(img_path.read_bytes(), use_llm=use_llm)
+def _predict(img_path: Path, use_llm: bool = True, full: bool = False):
+    """full=True 时走完整链路（判定 + Agent 改写），供改写评测复用同一份结果。
+
+    为什么必须复用：早先的写法是「判定跑一遍、改写又跑一遍」，同一条样本
+    会被模型判定两次，两次结论可能不一致（实测 hard_03 一次判违规、一次判
+    合规），导致判定指标和改写指标口径对不上。
+    """
+    data = img_path.read_bytes()
+    a = analyze(data) if full else detect(data, use_llm=use_llm)
     j = a.judgment
     return {
         "pred": 1 if a.is_violation else 0,
@@ -47,11 +54,12 @@ def _predict(img_path: Path, use_llm: bool = True):
         "llm_status": (j.status if j else "unknown"),
         "error": (j.error if j else ""),
         "ocr_score": a.ocr_score,
+        "analysis": a,
     }
 
 
-def _rewrite_stats(rows, use_llm: bool):
-    """对真实违规样本跑完整链路，量化改写效果。
+def _rewrite_stats(items):
+    """量化改写效果。items 为 [(sample_row, Analysis), ...]，直接复用判定阶段的结果。
 
     指标定义：
     - 改写执行率：成功拿到改写文本的占比（排除 Key 失效/网络失败）
@@ -61,17 +69,8 @@ def _rewrite_stats(rows, use_llm: bool):
     total = executed = clean = 0
     residual_total = 0
     details = []
-    for r in rows:
-        if r["label"] != 1:
-            continue
-        path = SAMPLES_DIR / r["filename"]
-        if not path.exists():
-            continue
+    for r, a in items:
         total += 1
-        a = analyze(path.read_bytes()) if use_llm else None
-        if a is None or not a.is_violation:
-            details.append((r["filename"], "-", "未判为违规，跳过改写", "-", "-"))
-            continue
         if not a.rewrite_ok:
             details.append(
                 (r["filename"], len(a.rule_hits), "改写未执行", "-", (a.rewrite_error or "")[:40])
@@ -167,6 +166,9 @@ def evaluate_all(use_llm: bool = True, with_rewrite: bool = False) -> dict:
     if not rows:
         raise FileNotFoundError(f"{EVAL_CSV} 为空或不存在；请先放图片并标注 label（1=违规, 0=正常）")
 
+    full = use_llm and with_rewrite  # 需要改写指标时一次跑完整链路
+    rewrite_items = []               # [(row, Analysis), ...] 供改写评测复用
+
     tp = fp = fn = tn = 0
     llm_calls = 0
     llm_fail = 0
@@ -178,7 +180,7 @@ def evaluate_all(use_llm: bool = True, with_rewrite: bool = False) -> dict:
         if not path.exists():
             details.append((r["filename"], r["label"], "-", "缺文件", "-", "-"))
             continue
-        p = _predict(path, use_llm=use_llm)
+        p = _predict(path, use_llm=use_llm, full=full)
         if p["undetermined"]:
             undetermined += 1
             details.append((r["filename"], r["label"], "无法判定", p["level"], f"{p['conf']:.2f}", r["note"]))
@@ -197,6 +199,8 @@ def evaluate_all(use_llm: bool = True, with_rewrite: bool = False) -> dict:
             tn += 1
         ok = "命中" if pred == truth else "错误"
         details.append((r["filename"], truth, pred, p["level"], f"{p['conf']:.2f} {ok}", r["note"]))
+        if full and truth == 1 and pred == 1:
+            rewrite_items.append((r, p["analysis"]))
 
     n = tp + fp + fn + tn
     precision = tp / (tp + fp) if tp + fp else 0.0
@@ -257,7 +261,7 @@ def evaluate_all(use_llm: bool = True, with_rewrite: bool = False) -> dict:
         if not use_llm:
             lines.append("- 未启用（改写需要 LLM，`--no-llm` 模式下跳过）。")
         else:
-            rs = _rewrite_stats(rows, use_llm=True)
+            rs = _rewrite_stats(rewrite_items)
             if rs["executed"] == 0:
                 lines.append(f"- 违规样本 {rs['total']} 条，改写**一次都没执行成功**，改写效果无数据。")
             else:

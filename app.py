@@ -22,7 +22,6 @@ if get_script_run_ctx(suppress_warning=True) is None:
 from src.config import (
     DEEPSEEK_API_KEY,
     DEEPSEEK_MODEL,
-    OCR_LOW_SCORE,
     REVIEW_CONFIDENCE,
     SAMPLES_DIR,
 )

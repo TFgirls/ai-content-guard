@@ -18,6 +18,7 @@ from openai import OpenAI
 from pydantic import BaseModel, Field, field_validator
 
 from .config import DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL
+from .jsonutil import loads
 from .rules import RISK_ORDER, rule_risk, scan_rules
 
 logger = logging.getLogger(__name__)
@@ -135,7 +136,7 @@ def judge(text: str, use_llm: bool = True) -> JudgeResult:
             temperature=0,
             response_format={"type": "json_object"},
         )
-        data = json.loads(resp.choices[0].message.content)
+        data = loads(resp.choices[0].message.content)
         result = JudgeResult(**data)
 
         merged, conflict = merge_levels(rule_level, result.risk_level)

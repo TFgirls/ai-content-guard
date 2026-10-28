@@ -1,8 +1,9 @@
-"""主链路：OCR -> 规则 + LLM 判定 -> 违规则改写 -> 改写后复检。"""
+"""主链路：OCR -> 规则 + LLM 判定 -> Agent 循环改写 -> 改写后复检。"""
 
 from dataclasses import dataclass, field
 from typing import List, Optional
 
+from .agent import AgentTrace, review_text
 from .config import OCR_LOW_SCORE, REVIEW_CONFIDENCE
 from .judge import JudgeResult, judge
 from .ocr import extract_text, mean_score
@@ -25,6 +26,8 @@ class Analysis:
     # judged / no_text
     status: str = "judged"
     ocr_score: float = 0.0
+    # Agent 循环的逐轮记录（use_agent=True 时才有）
+    trace: Optional[AgentTrace] = None
 
     @property
     def undetermined(self) -> bool:
@@ -63,6 +66,8 @@ class Analysis:
             reasons.append("本次仅规则层判定，未做语义复核")
         if self.lines and self.ocr_score < OCR_LOW_SCORE:
             reasons.append(f"OCR 平均置信度 {self.ocr_score:.2f} 偏低，文字可能识别有误")
+        if self.trace and self.trace.escalated and self.is_violation:
+            reasons.append(f"改写未收敛：{self.trace.reason}")
         return reasons
 
     @property
@@ -71,7 +76,7 @@ class Analysis:
 
 
 def detect(image_bytes: bytes, use_llm: bool = True) -> Analysis:
-    """只做判定，不改写。评测脚本走这条路径，省一次 LLM 调用。"""
+    """只做判定，不改写。评测脚本走这条路径，省 LLM 调用。"""
     text, lines = extract_text(image_bytes)
     a = Analysis(
         ocr_text=text,
@@ -93,19 +98,39 @@ def detect(image_bytes: bytes, use_llm: bool = True) -> Analysis:
     return a
 
 
-def analyze(image_bytes: bytes) -> Analysis:
-    """完整链路：OCR -> 判定 -> 违规则改写 -> 改写后复检。"""
+def analyze(image_bytes: bytes, use_agent: bool = True) -> Analysis:
+    """完整链路：OCR -> 判定 -> 改写 -> 复检。
+
+    use_agent=True 走多轮循环（带反馈、可观测）；
+    False 退回单轮改写，保留下来用于对比与回退。
+    """
     a = detect(image_bytes)
     if a.undetermined:
         return a
 
-    if a.is_violation:
-        out = rewrite(a.ocr_text, a.judgment.categories, a.rule_hits)
-        a.rewritten, a.changes = out.text, out.changes
-        a.rewrite_ok, a.rewrite_error = out.ok, out.error
-        # 只有真的改写过才复检；否则「原文的命中」会被误读成「改写不彻底」
-        if out.ok:
-            a.residual_hits = scan_rules(a.rewritten)
-    else:
+    if not a.is_violation:
         a.rewritten, a.changes = a.ocr_text, []
+        return a
+
+    if use_agent:
+        trace = review_text(
+            a.ocr_text,
+            a.judgment.categories,
+            initial_violation=a.is_violation,
+        )
+        a.trace = trace
+        a.rewritten = trace.final_text
+        first = trace.rounds[0] if trace.rounds else None
+        a.changes = first.changes if first else []
+        a.rewrite_ok = bool(first and first.ok and first.rewritten)
+        a.rewrite_error = (first.error if first else "") or ""
+        a.residual_hits = trace.rounds[-1].residual if trace.rounds else []
+        return a
+
+    out = rewrite(a.ocr_text, a.judgment.categories, a.rule_hits)
+    a.rewritten, a.changes = out.text, out.changes
+    a.rewrite_ok, a.rewrite_error = out.ok, out.error
+    # 只有真的改写过才复检；否则「原文的命中」会被误读成「改写不彻底」
+    if out.ok:
+        a.residual_hits = scan_rules(a.rewritten)
     return a

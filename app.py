@@ -344,6 +344,18 @@ with right:
                 unsafe_allow_html=True,
             )
 
+        # Agent 循环的逐轮记录：这是「改写重试到收敛」的直接证据
+        if a.trace and a.trace.attempts:
+            st.markdown("**改写过程**")
+            st.markdown(
+                "".join(
+                    f'<div class="reason-row">· 第 {r.round} 轮：命中 {len(r.hits)} 处 '
+                    f'→ 改写后残留 {len(r.residual)} 处</div>'
+                    for r in a.trace.rounds
+                ),
+                unsafe_allow_html=True,
+            )
+
         # 关键区分：没改写成功 ≠ 改得不干净
         if not a.rewrite_ok:
             st.warning(f"改写未执行（{brief(a.rewrite_error)}），上图为原文，不代表已验证合规。")

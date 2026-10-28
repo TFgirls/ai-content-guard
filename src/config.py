@@ -25,3 +25,6 @@ REVIEW_CONFIDENCE = float(os.getenv("REVIEW_CONFIDENCE", "0.75"))
 
 # OCR 平均置信度低于该值，视为图片质量可疑，结果一并转人工
 OCR_LOW_SCORE = float(os.getenv("OCR_LOW_SCORE", "0.60"))
+
+# Agent 循环：改写最多尝试几轮（超过则转人工）
+MAX_REWRITE_ROUNDS = int(os.getenv("MAX_REWRITE_ROUNDS", "3"))

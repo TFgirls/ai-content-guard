@@ -10,11 +10,12 @@
 
 import json
 import logging
+import re
 from dataclasses import dataclass, field
 from typing import List
 
 from openai import OpenAI
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from .config import DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL
 
@@ -24,6 +25,35 @@ logger = logging.getLogger(__name__)
 class RewriteResult(BaseModel):
     rewritten: str = ""
     changes: List[str] = Field(default_factory=list)
+
+    @field_validator("rewritten", mode="before")
+    @classmethod
+    def _coerce_text(cls, v):
+        if isinstance(v, (list, tuple)):
+            return "\n".join(str(x) for x in v)
+        return "" if v is None else str(v)
+
+    @field_validator("changes", mode="before")
+    @classmethod
+    def _coerce_changes(cls, v):
+        """模型经常把 changes 写成一段话而不是数组。
+
+        以前这里严格按 List[str] 校验，模型一「偷懒」整条改写就作废
+        （实测 10 条违规里 3 条因此没改写），所以要宽容转换。
+        """
+        if v is None:
+            return []
+        if isinstance(v, str):
+            return [x.strip() for x in re.split(r"[；;\n]", v) if x.strip()]
+        if isinstance(v, (list, tuple)):
+            out = []
+            for x in v:
+                if isinstance(x, dict):
+                    out.append("；".join(str(k) for k in x.values()))
+                elif str(x).strip():
+                    out.append(str(x).strip())
+            return out
+        return [str(v)]
 
 
 @dataclass

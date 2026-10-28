@@ -11,10 +11,11 @@
 
 import json
 import logging
+import re
 from typing import List
 
 from openai import OpenAI
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from .config import DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL
 from .rules import RISK_ORDER, rule_risk, scan_rules
@@ -37,6 +38,27 @@ class JudgeResult(BaseModel):
     # 规则与 LLM 结论不一致时为 True，需人工确认
     conflict: bool = False
     error: str = ""
+
+    @field_validator("categories", "reasons", mode="before")
+    @classmethod
+    def _coerce_list(cls, v):
+        """模型可能返回单个字符串而非数组，宽容处理。"""
+        if v is None:
+            return []
+        if isinstance(v, str):
+            return [x.strip() for x in re.split(r"[；;\n]", v) if x.strip()]
+        if isinstance(v, (list, tuple)):
+            return [str(x).strip() for x in v if str(x).strip()]
+        return [str(v)]
+
+    @field_validator("confidence", mode="before")
+    @classmethod
+    def _coerce_conf(cls, v):
+        try:
+            f = float(v)
+        except (TypeError, ValueError):
+            return 0.0
+        return min(max(f, 0.0), 1.0)
 
 
 _SYSTEM = (

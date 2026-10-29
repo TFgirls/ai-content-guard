@@ -41,6 +41,9 @@ python -m src.evaluate --with-rewrite            # 规则 + LLM + 改写效果�
 
 streamlit run app.py                 # 网页界面
 uvicorn src.api:app --port 8000      # HTTP 接口，文档见 http://127.0.0.1:8000/docs
+
+pip install -r requirements-dev.txt
+pytest                              # 60 条单元测试，2 秒跑完，不打网络
 ```
 
 > 必须用 `streamlit run` 启动。直接 `python app.py` 会被启动守卫拦下并给出提示——
@@ -72,6 +75,25 @@ curl -X POST http://127.0.0.1:8000/review -F "file=@data/samples/ad_02.png"
 | 改写未执行（无 Key / 网络失败） | 立即转人工，不空转重试 |
 
 这样既能回答「你为什么用 LangChain」，也能回答「你为什么不全靠 Agent」。
+
+## 测试
+
+```bash
+pytest        # 60 passed
+```
+
+| 文件 | 覆盖内容 |
+|---|---|
+| `test_rules.py` | 归一化（换行/空格/全角/零宽）、大小写不敏感、手机号数字边界、风险分级 |
+| `test_agent.py` | 一轮收敛、**两轮才收敛**、跑满上限转人工、改写失败立即停、规则漏检强制改写 |
+| `test_judge.py` | 规则与模型冲突取严、冲突时置信度压制、失败降级留痕、字段容错 |
+| `test_pipeline.py` | OCR 无文字不判合规、无 Key 时不报残留、复核原因、合规不触发改写 |
+| `test_jsonutil.py` | 围栏、前后多余文字、中文引号、未闭合括号 |
+
+全部用 mock 顶掉模型调用与 OCR，不打网络、不需要 Key，任何机器上都能跑。
+
+**多轮改写在真实评测集里从未被触发**（18 张全部第 1 轮收敛），所以 `test_agent.py`
+用脚本化 mock 专门覆盖了「第 1 轮残留 → 第 2 轮清零」这条路径。
 
 ## 评测结果
 

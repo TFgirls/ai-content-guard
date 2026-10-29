@@ -1,6 +1,6 @@
-# 虚拟环境
+# 虚拟环境（.venv、.venv-test 等临时环境一并忽略）
 venv/
-.venv/
+.venv*/
 
 # 密钥
 .env

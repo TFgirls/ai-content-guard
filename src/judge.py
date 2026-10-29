@@ -19,6 +19,7 @@ from pydantic import BaseModel, Field, field_validator
 
 from .config import DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL
 from .jsonutil import loads
+from .logutil import warn_once
 from .rules import RISK_ORDER, rule_risk, scan_rules
 
 logger = logging.getLogger(__name__)
@@ -158,7 +159,7 @@ def judge(text: str, use_llm: bool = True) -> JudgeResult:
         return result
 
     except Exception as e:  # 网络/配额/鉴权/JSON 解析失败都不该阻断主流程，但必须留痕
-        logger.warning("LLM 判定失败，退回规则层：%s: %s", type(e).__name__, e)
+        warn_once(logger, f"judge:{type(e).__name__}", "LLM 判定失败，退回规则层：%s: %s", type(e).__name__, e)
         fallback = _rule_only(hits, rule_level)
         fallback.status = "llm_failed"
         fallback.error = f"{type(e).__name__}: {e}"

@@ -5,20 +5,26 @@
 """
 
 import io
+import threading
 
 import numpy as np
 from PIL import Image
 
 _engine = None
+# 服务化之后是线程池并发调用，首次加载模型时若不加锁，
+# 多个请求会同时判定 _engine is None 并各加载一份模型
+_lock = threading.Lock()
 
 
 def get_engine():
     """RapidOCR 单例，避免每次调用重复加载模型。"""
     global _engine
     if _engine is None:
-        from rapidocr_onnxruntime import RapidOCR
+        with _lock:
+            if _engine is None:  # 双重检查：等锁期间可能已被别的线程初始化
+                from rapidocr_onnxruntime import RapidOCR
 
-        _engine = RapidOCR()
+                _engine = RapidOCR()
     return _engine
 
 

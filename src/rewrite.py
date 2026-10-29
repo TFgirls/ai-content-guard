@@ -19,6 +19,7 @@ from pydantic import BaseModel, Field, field_validator
 
 from .config import DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL
 from .jsonutil import loads
+from .logutil import warn_once
 
 logger = logging.getLogger(__name__)
 
@@ -107,7 +108,7 @@ def rewrite(text: str, categories: List[str], hits: List[dict] | None = None) ->
             logger.warning("改写返回非 JSON（第 %d 次尝试）：%s", attempt, e)
             continue
         except Exception as e:  # 网络/配额/鉴权失败
-            logger.warning("改写调用失败：%s: %s", type(e).__name__, e)
+            warn_once(logger, f"rewrite:{type(e).__name__}", "改写调用失败：%s: %s", type(e).__name__, e)
             return RewriteOutcome(
                 text,
                 [f"改写调用失败（{type(e).__name__}），返回原文"],

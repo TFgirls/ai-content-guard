@@ -104,3 +104,21 @@ class Test观测信息:
     def test_summary可直接展示(self, scripted_rewrite):
         scripted_rewrite(["干净"])
         assert review_text("三天根治颈椎病").summary().startswith("第 1 轮")
+
+
+class Test时间预算:
+    def test_预算耗尽时不再开新一轮(self, scripted_rewrite):
+        """第 1 轮改不干净，但剩余预算不足半次调用，应直接转人工。"""
+        _, state = scripted_rewrite(["三天根治颈椎病"] * 5)
+        t = review_text("三天根治颈椎病，无效退款", budget=0.001)
+
+        assert state["calls"] == 1          # 只跑了第 1 轮
+        assert t.escalated is True
+        assert "预算" in t.reason
+
+    def test_预算充足时正常多轮(self, scripted_rewrite):
+        _, state = scripted_rewrite(["三天根治颈椎病", "三天缓解颈椎不适"])
+        t = review_text("三天根治颈椎病", budget=60)
+
+        assert state["calls"] == 2
+        assert t.resolved is True

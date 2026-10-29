@@ -28,3 +28,11 @@ OCR_LOW_SCORE = float(os.getenv("OCR_LOW_SCORE", "0.60"))
 
 # Agent 循环：改写最多尝试几轮（超过则转人工）
 MAX_REWRITE_ROUNDS = int(os.getenv("MAX_REWRITE_ROUNDS", "3"))
+
+# 单次模型调用超时（秒）
+LLM_TIMEOUT = float(os.getenv("LLM_TIMEOUT", "20"))
+
+# 整条链路的耗时预算（秒），从 OCR 开始算。
+# 判定 + 多轮改写累计超预算就不再开新一轮，直接转人工——
+# 否则最坏情况 20+20×3 会拖到 80 秒以上，多数网关 60 秒就断开了。
+REQUEST_BUDGET = float(os.getenv("REQUEST_BUDGET", "45"))

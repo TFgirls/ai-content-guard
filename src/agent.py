@@ -20,12 +20,13 @@
 """
 
 import json
+import time
 from dataclasses import dataclass, field
 from typing import List, Optional
 
 from langchain_core.tools import tool
 
-from .config import MAX_REWRITE_ROUNDS
+from .config import LLM_TIMEOUT, MAX_REWRITE_ROUNDS, REQUEST_BUDGET
 from .rewrite import rewrite
 from .rules import scan_rules
 
@@ -118,6 +119,7 @@ def review_text(
     categories: Optional[List[str]] = None,
     max_rounds: Optional[int] = None,
     initial_violation: bool = False,
+    budget: Optional[float] = None,
 ) -> AgentTrace:
     """对一段文案执行「判定 → 改写 → 复检」循环。
 
@@ -126,6 +128,7 @@ def review_text(
     否则循环只看规则扫描会直接把违规内容判成「无需改写」放过去。
     """
     limit = max_rounds or MAX_REWRITE_ROUNDS
+    deadline = time.monotonic() + (budget if budget is not None else REQUEST_BUDGET)
     trace = AgentTrace()
 
     if not text or not text.strip():
@@ -138,6 +141,16 @@ def review_text(
     hits = _scan(current)
 
     for i in range(1, limit + 1):
+        # 第 1 轮不看预算（否则什么都没做就退出）；之后每轮先看还剩多少时间，
+        # 剩余不足半次调用就别开新一轮了，开了大概率也会超时
+        if i > 1:
+            remain = deadline - time.monotonic()
+            if remain < LLM_TIMEOUT * 0.5:
+                trace.final_text = current
+                trace.escalated = True
+                trace.reason = f"时间预算不足（剩 {max(remain, 0):.0f}s），第 {i} 轮未执行"
+                return trace
+
         need_rewrite = bool(hits) or (i == 1 and initial_violation)
         log = RoundLog(round=i, hits=hits)
 

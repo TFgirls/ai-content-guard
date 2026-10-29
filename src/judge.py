@@ -17,7 +17,7 @@ from typing import List
 from openai import OpenAI
 from pydantic import BaseModel, Field, field_validator
 
-from .config import DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL
+from .config import DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL, LLM_TIMEOUT
 from .jsonutil import loads
 from .logutil import warn_once
 from .rules import RISK_ORDER, rule_risk, scan_rules
@@ -87,7 +87,7 @@ def _get_client() -> OpenAI:
     """复用同一个 client，避免逐条重建连接。"""
     global _client
     if _client is None:
-        _client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url=DEEPSEEK_BASE_URL, timeout=30)
+        _client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url=DEEPSEEK_BASE_URL, timeout=LLM_TIMEOUT)
     return _client
 
 

@@ -1,10 +1,11 @@
 """主链路：OCR -> 规则 + LLM 判定 -> Agent 循环改写 -> 改写后复检。"""
 
+import time
 from dataclasses import dataclass, field
 from typing import List, Optional
 
 from .agent import AgentTrace, review_text
-from .config import OCR_LOW_SCORE, REVIEW_CONFIDENCE
+from .config import OCR_LOW_SCORE, REQUEST_BUDGET, REVIEW_CONFIDENCE
 from .judge import JudgeResult, judge
 from .ocr import extract_text, mean_score
 from .rewrite import rewrite
@@ -104,6 +105,7 @@ def analyze(image_bytes: bytes, use_agent: bool = True) -> Analysis:
     use_agent=True 走多轮循环（带反馈、可观测）；
     False 退回单轮改写，保留下来用于对比与回退。
     """
+    started = time.monotonic()
     a = detect(image_bytes)
     if a.undetermined:
         return a
@@ -113,10 +115,13 @@ def analyze(image_bytes: bytes, use_agent: bool = True) -> Analysis:
         return a
 
     if use_agent:
+        # OCR 与判定已经花掉的时间要从总预算里扣掉
+        remaining = max(REQUEST_BUDGET - (time.monotonic() - started), 1.0)
         trace = review_text(
             a.ocr_text,
             a.judgment.categories,
             initial_violation=a.is_violation,
+            budget=remaining,
         )
         a.trace = trace
         a.rewritten = trace.final_text

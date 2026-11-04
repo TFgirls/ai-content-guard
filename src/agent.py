@@ -183,7 +183,14 @@ def review_text(
         log.residual = hits
         trace.rounds.append(log)
 
-    # 跑满上限仍有残留
+    # 跑满上限。注意：最后一轮可能刚好改干净，此时 hits 已为空，
+    # 不能无条件转人工——否则会报出「已达最大轮次，仍残留 0 处」这种自相矛盾的结论。
+    if not hits:
+        trace.final_text = current
+        trace.resolved = True
+        trace.reason = "零残留"
+        return trace
+
     trace.final_text = current
     trace.escalated = True
     trace.reason = f"已达最大改写轮次（{limit}），仍残留 {len(hits)} 处"

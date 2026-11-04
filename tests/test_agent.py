@@ -122,3 +122,27 @@ class Test时间预算:
 
         assert state["calls"] == 2
         assert t.resolved is True
+
+
+class Test边界_最后一轮才收敛:
+    """回归用例：曾漏测这个中间态，导致「仍残留 0 处」的自相矛盾结论。"""
+
+    def test_最后一轮改干净应判为通过(self, scripted_rewrite):
+        """limit=3，前两轮有残留、第三轮清零——这是收敛，不是转人工。"""
+        _, state = scripted_rewrite(["三天根治颈椎病", "三天根治颈椎病", "三天缓解颈椎不适"])
+        t = review_text("三天根治颈椎病，无效退款", max_rounds=3)
+
+        assert state["calls"] == 3
+        assert t.resolved is True
+        assert t.escalated is False
+        assert t.rounds[-1].residual == []
+        assert "残留 0 处" not in t.summary()
+
+    def test_跑满且真有残留才转人工(self, scripted_rewrite):
+        """对照组：三轮都改不干净，仍要转人工。"""
+        scripted_rewrite(["三天根治颈椎病"] * 5)
+        t = review_text("三天根治颈椎病", max_rounds=3)
+
+        assert t.resolved is False
+        assert t.escalated is True
+        assert len(t.rounds[-1].residual) > 0

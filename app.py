@@ -54,34 +54,34 @@ CSS = """
 
 /* 标题区 */
 .hero-sub {
-  font-size: 13.5px; opacity: .62; margin: -10px 0 16px; letter-spacing: .01em;
+    font-size: 13.5px; opacity: .62; margin: -10px 0 16px; letter-spacing: .01em;
 }
 .cap-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px; }
 .cap {
-  font-size: 12px; padding: 4px 11px; border-radius: 999px;
-  color: #0F8A7C; background: rgba(18,165,148,.10);
-  border: 1px solid rgba(18,165,148,.28);
+    font-size: 12px; padding: 4px 11px; border-radius: 999px;
+    color: #0F8A7C; background: rgba(18,165,148,.10);
+    border: 1px solid rgba(18,165,148,.28);
 }
 
 /* 上传区：撑高 + 虚线 + 垂直居中，让主操作有存在感 */
 [data-testid="stFileUploaderDropzone"] {
-  min-height: 150px; border-radius: 16px; padding: 18px;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 4px;
-  border: 1.5px dashed rgba(18,165,148,.50);
-  background: rgba(18,165,148,.045);
-  transition: border-color .15s, background .15s;
+    min-height: 150px; border-radius: 16px; padding: 18px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 4px;
+    border: 1.5px dashed rgba(18,165,148,.50);
+    background: rgba(18,165,148,.045);
+    transition: border-color .15s, background .15s;
 }
 [data-testid="stFileUploaderDropzone"]:hover {
-  border-color: #12A594; background: rgba(18,165,148,.09);
+    border-color: #12A594; background: rgba(18,165,148,.09);
 }
 [data-testid="stFileUploaderDropzone"] button { border-radius: 10px; }
 [data-testid="stFileUploaderDropzone"] small { opacity: .45; font-size: 11.5px; }
 
 /* 图片统一成卡片感，否则白底样图和页面糊在一起 */
 [data-testid="stImage"] img {
-  border-radius: 10px;
-  border: 1px solid rgba(128,128,128,.16);
+    border-radius: 10px;
+    border: 1px solid rgba(128,128,128,.16);
 }
 
 /* 本地演示不需要云部署入口 */
@@ -90,8 +90,8 @@ CSS = """
 
 /* 分区小标题 */
 .sec-label {
-  font-size: 13px; font-weight: 600; opacity: .72;
-  letter-spacing: .04em; margin: 28px 0 2px;
+    font-size: 13px; font-weight: 600; opacity: .72;
+    letter-spacing: .04em; margin: 28px 0 2px;
 }
 
 /* 样图卡片 */
@@ -100,25 +100,25 @@ CSS = """
 
 /* 侧栏键值行 */
 .kv {
-  display:flex; justify-content:space-between; gap:10px;
-  font-size: 12.5px; padding: 6px 0;
-  border-bottom: 1px solid rgba(128,128,128,.14);
+    display:flex; justify-content:space-between; gap:10px;
+    font-size: 12.5px; padding: 6px 0;
+    border-bottom: 1px solid rgba(128,128,128,.14);
 }
 .kv span { opacity: .58; }
 .kv b { font-weight: 600; }
 
 /* OCR 文本框：等宽字体读中文很难受，换成常规字体 + 保留换行 */
 .ocr-box {
-  white-space: pre-wrap; font-size: 13.5px; line-height: 1.8;
-  background: var(--secondary-background-color);
-  padding: 12px 15px; border-radius: 10px;
-  border: 1px solid rgba(128,128,128,.14);
+    white-space: pre-wrap; font-size: 13.5px; line-height: 1.8;
+    background: var(--secondary-background-color);
+    padding: 12px 15px; border-radius: 10px;
+    border: 1px solid rgba(128,128,128,.14);
 }
 
 /* 改写对比 */
 .diff-old {
-  font-size: 13px; line-height: 1.8; color: #8A8681;
-  text-decoration: line-through; text-decoration-thickness: 1px;
+    font-size: 13px; line-height: 1.8; color: #8A8681;
+    text-decoration: line-through; text-decoration-thickness: 1px;
 }
 .diff-new { font-size: 13px; line-height: 1.8; color: #0B7A6B; font-weight: 500; }
 
@@ -134,8 +134,8 @@ CSS = """
 CSS_COMPACT_UPLOAD = """
 <style>
 [data-testid="stFileUploaderDropzone"] {
-  min-height: 56px; padding: 8px 16px;
-  flex-direction: row; gap: 12px; border-radius: 12px;
+    min-height: 56px; padding: 8px 16px;
+    flex-direction: row; gap: 12px; border-radius: 12px;
 }
 [data-testid="stFileUploaderDropzone"] small { display: none; }
 [data-testid="stFileUploader"] [data-testid="stWidgetLabel"] { display: none; }

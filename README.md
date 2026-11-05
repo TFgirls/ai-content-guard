@@ -60,40 +60,6 @@ curl -X POST http://127.0.0.1:8000/review -F "file=@data/samples/ad_02.png"
 返回结构含判定结果、逐条命中、改写稿、残留，以及 `agent_rounds`（每轮命中/残留数量）——
 调用方能看到「第几轮才改干净」，而不是只拿到一个最终答案。
 
-### Docker
-
-只容器化 **API 服务**，Streamlit 界面留在本地跑——界面是演示用的，塞进镜像只会多背一套前端依赖。
-
-```bash
-docker compose up -d                    # 构建并启动，端口 8000
-docker compose ps                       # 看健康状态（STATUS 显示 healthy）
-docker compose logs -f                  # 看日志
-docker compose down                     # 停止
-```
-
-单独构建：
-
-```bash
-docker build -t ai-content-guard:latest .
-docker run --rm -p 8000:8000 --env-file .env ai-content-guard:latest
-```
-
-几个设计点：
-
-| 做法 | 原因 |
-|---|---|
-| 基础镜像用 `python:3.12-slim` 而非完整版 | 少约 700MB |
-| 装 `libgl1` / `libglib2.0-0` | RapidOCR 依赖 opencv，slim 镜像缺这两个会 `libGL.so.1 not found` |
-| 先 COPY 依赖清单再 COPY 代码 | 改代码不会让依赖层失效，重建时命中缓存 |
-| 用 `requirements-api.txt` 而非完整清单 | 去掉 streamlit 系，镜像再少约 100MB |
-| 非 root 用户运行 | 容器默认 root，应用被攻破时影响面太大 |
-| `.env` 排除出构建上下文，运行时注入 | 密钥写进镜像等于固化进每一层，推仓库即泄露 |
-| 只 COPY `data/lexicon.json`，不拷样例图 | 规则层启动必需，样例图 240KB 对 API 无用 |
-
-> ⚠️ 这套配置**尚未在真实 Docker 环境验证**（开发机未安装 Docker）。
-> 已做的检查：依赖清单覆盖 `src/` 全部第三方 import、COPY 路径均存在、
-> `.env` 确认被排除。首次使用请先 `docker build` 看是否通过，再跑一次 `POST /review` 验证端到端。
-
 ## Agent 层：为什么不直接用 AgentExecutor
 
 改写流程是**确定性**的：扫词表 → 有命中就改 → 复检 → 有残留再改。工具选择没有歧义，

@@ -11,6 +11,10 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 
+# 编辑器（个人配置，各人环境不同，不该进版本控制）
+.idea/
+.vscode/
+
 # 操作系统
 .DS_Store
 Thumbs.db

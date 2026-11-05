@@ -1,0 +1,40 @@
+# 构建上下文里要排除的东西。不排的话 docker build 会把 600MB 的 .venv
+# 一起发给守护进程，构建又慢又容易命中不了缓存。
+
+# 虚拟环境（Windows / Linux 两种命名都排）
+.venv/
+.venv-test/
+venv/
+env/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# 版本控制
+.git/
+.gitignore
+
+# 密钥——绝对不进镜像
+.env
+.env.*
+!.env.example
+
+# 测试、文档、截图：镜像里不需要
+tests/
+docs/
+assets/
+*.md
+!README.md
+
+# 样例图与评测数据（240KB，API 服务用不到；跑评测请在宿主机执行）
+data/samples/
+data/eval/
+reports/
+
+# 编辑器
+.idea/
+.vscode/
+*.swp

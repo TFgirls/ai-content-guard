@@ -4,6 +4,8 @@
 就能知道有没有把老问题带回来。
 """
 
+import pytest
+
 from src.rules import normalize, rule_risk, scan_rules
 
 
@@ -88,3 +90,32 @@ class TestRuleRisk:
     def test_医疗功效为高风险(self):
         hits = scan_rules("根治颈椎病")
         assert rule_risk(hits) == "high"
+
+
+class Test上下文排除:
+    """子串匹配的合法搭配排除。
+
+    这几条都来自真实商品图上的误报：「100%棉」被当绝对化承诺、
+    「激光治疗术后」被当宣称疗效。排除规则必须只挡误报、不挡真违规。
+    """
+
+    @pytest.mark.parametrize("text", ["大白鲨100%棉长袖t恤", "100%羊毛围巾", "100%正品保证"])
+    def test_成分与正品表述不判(self, text):
+        assert scan_rules(text) == []
+
+    @pytest.mark.parametrize("text", ["100%有效", "100%见效", "百分百有效"])
+    def test_绝对化承诺仍要判(self, text):
+        assert scan_rules(text)
+
+    @pytest.mark.parametrize("text", ["激光治疗术后护理", "医美治疗期间", "治疗仪使用方法"])
+    def test_使用场景不判(self, text):
+        assert scan_rules(text) == []
+
+    @pytest.mark.parametrize("text", ["可治疗颈椎病", "治疗高血压"])
+    def test_宣称疗效仍要判(self, text):
+        assert scan_rules(text)
+
+    def test_排除不影响其他类别(self):
+        """「100%棉」不判，但同一句里的「根治」照抓。"""
+        hits = scan_rules("100%棉材质，可根治颈椎病")
+        assert [h["match"] for h in hits] == ["根治"]

@@ -33,6 +33,42 @@ _PATTERNS = [
 
 _LEX_CACHE: Dict[str, object] = {"mtime": None, "data": {}}
 
+# 子串匹配的合法用法排除表。
+#
+# 词表是"命中即判"，但有些词在特定搭配下完全合法，硬判就是误报。
+# 实测真实商品图上 3 条误报全来自这里：
+#   「100%棉」被判绝对化用语、「100%正品证」同理、「激光治疗术后」被判宣称疗效。
+#
+# 每条排除规则都必须有真实误报作为依据，不做泛化猜测——
+# 否则会顺手把真违规也放过去，那比误报更糟。
+_CONTEXT_EXCLUDE = {
+    "100%": {
+        # 成分含量、正品承诺，不是"100% 有效"这种绝对化承诺
+        "suffix": ("棉", "丝", "羊毛", "羊绒", "涤纶", "锦纶", "亚麻", "天然", "纯",
+                   "正品", "保证", "原装", "进口"),
+        "reason": "数字型成分/正品表述，非绝对化承诺",
+    },
+    "治疗": {
+        # 使用场景（激光治疗术后、医美治疗后）不是宣称能治病
+        "prefix": ("激光", "医美", "物理", "光电"),
+        "suffix": ("术后", "仪", "疗程", "方案", "过程", "期间"),
+        "reason": "使用场景描述，非功效宣称",
+    },
+}
+
+
+def _excluded(word: str, target: str, pos: int) -> bool:
+    """命中词处在合法搭配里时返回 True，调用方应跳过该命中。"""
+    rule = _CONTEXT_EXCLUDE.get(word)
+    if not rule:
+        return False
+    end = pos + len(word)
+    suffix = target[end : end + 4]
+    prefix = target[max(0, pos - 4) : pos]
+    if any(suffix.startswith(s) for s in rule.get("suffix", ())):
+        return True
+    return any(prefix.endswith(p) for p in rule.get("prefix", ()))
+
 
 def normalize(text: str) -> Tuple[str, List[int]]:
     """归一化文本，并返回「归一化字符下标 -> 原文下标」映射。
@@ -111,6 +147,8 @@ def scan_rules(text: str, normalize_text: bool = True) -> List[dict]:
                 if wl != w and len(wl) == len(w):
                     pos = target_low.find(wl)
             if pos >= 0 and (category, w) not in seen:
+                if _excluded(w, target, pos):
+                    continue
                 seen.add((category, w))
                 hits.append(
                     {

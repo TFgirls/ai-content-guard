@@ -1,0 +1,534 @@
+{
+  "generated_at": "2026-11-06T14:20:27",
+  "count": 57,
+  "images": [
+    {
+      "source": "C:\\Users\\25508\\.workbuddy\\clipboard-images\\clipboard-2026-11-06T05-43-32-574Z-903f87d7.png",
+      "name": "clipboard-2026-11-06T05-43-32-574Z-903f87d7.png",
+      "lines": 5,
+      "ocr_score": 0.968,
+      "text": "ZZLSHIJA\n战狼世家男士冬季加绒加厚新款马\n甲无袖保暖坎肩工装爸爸背心外套\n￥99￥199\n已抢48件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "C:\\Users\\25508\\.workbuddy\\clipboard-images\\clipboard-2026-11-06T05-43-32-576Z-4c02a038.png",
+      "name": "clipboard-2026-11-06T05-43-32-576Z-4c02a038.png",
+      "lines": 6,
+      "ocr_score": 0.92,
+      "text": "SEPTWOIVES\n区克专\n七匹狼2025秋季新款翻领春秋夹克\n百搭工装休闲商务上衣外套男装\n¥238￥1199\n已抢460件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "C:\\Users\\25508\\.workbuddy\\clipboard-images\\clipboard-2026-11-06T05-43-32-578Z-265cf832.png",
+      "name": "clipboard-2026-11-06T05-43-32-578Z-265cf832.png",
+      "lines": 6,
+      "ocr_score": 0.971,
+      "text": "JASONWOOD\n坚持我的\nJASONWOOD重磅立领双开拉链开\n衫毛衣男秋季潮牌高级感针织衫外\n￥78￥200\n已抢9432件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "C:\\Users\\25508\\.workbuddy\\clipboard-images\\clipboard-2026-11-06T05-43-32-580Z-ca12c251.png",
+      "name": "clipboard-2026-11-06T05-43-32-580Z-ca12c251.png",
+      "lines": 7,
+      "ocr_score": 0.983,
+      "text": "MIANZHI\n纯棉\n阔腿裤\n【棉致】美式纯棉工装裤男款宽松\n直筒2026春秋季新款阔腿休闲长裤\n￥62.5￥130\n已抢3954件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "C:\\Users\\25508\\.workbuddy\\clipboard-images\\clipboard-2026-11-06T05-43-32-582Z-f90534f9.png",
+      "name": "clipboard-2026-11-06T05-43-32-582Z-f90534f9.png",
+      "lines": 6,
+      "ocr_score": 0.92,
+      "text": "ZZLSHIJIA\n加棉加厚\nZ·L·SHIJIA/战狼世家情侣石墨\n烯保暖棉衣冬季防风保暖户外棉衣\n¥67.8?569\n总售3539件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "C:\\Users\\25508\\.workbuddy\\clipboard-images\\clipboard-2026-11-06T05-43-32-584Z-524bd31f.png",
+      "name": "clipboard-2026-11-06T05-43-32-584Z-524bd31f.png",
+      "lines": 6,
+      "ocr_score": 0.947,
+      "text": "Swamp\narea\"\n可收腰连帽户外冲锋风衣男春季帅\n气中长款大衣夹克韩版外套潮\n￥168￥360\n已抢571件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "C:\\Users\\25508\\.workbuddy\\clipboard-images\\clipboard-2026-11-06T05-43-32-586Z-570ee51e.png",
+      "name": "clipboard-2026-11-06T05-43-32-586Z-570ee51e.png",
+      "lines": 6,
+      "ocr_score": 0.923,
+      "text": "DABAISHA\nCINCC 1ATG\n大白鲨国潮拼接皮衣男女春秋季时\n尚潮流外套情侣痞帅宽松棒球夹克\n￥138￥210\n已抢1241件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "C:\\Users\\25508\\.workbuddy\\clipboard-images\\clipboard-2026-11-06T05-43-32-589Z-caf9dfcb.png",
+      "name": "clipboard-2026-11-06T05-43-32-589Z-caf9dfcb.png",
+      "lines": 7,
+      "ocr_score": 0.923,
+      "text": "HOOOEE\n全羊毛·费尔岛提花\n旭感细腻柔软亲肤\n【470g重磅羊毛】红豆秋冬费尔岛\n提花打底加厚男士针织保暖羊毛衫\n￥470￥1399\n已抢671件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 130712.png",
+      "name": "屏幕截图 2026-11-06 130712.png",
+      "lines": 15,
+      "ocr_score": 0.947,
+      "text": "!\nThis diff contains a change in line endings from 'LF' to 'CRLF'.\n@@-3,9+3,6@@\n基于本地文档的**检索增强生成（RAG）**问答应用：把一批.txt文档切片、向量化建库，\n用中文提问后，系统从文档中检索相关片段、由大模型生成答案，并标注答案来源（可追溯、防幻觉）。\n本仓库是^course-rag的**作品集化版本**：数据换成公开的**Python官方教程**（tutorial章节，中英两版各17个“.txt\"），\n不含任何私有课件，可直接对外展示／部署/面试演示。\n8\n6\n6\n# 功能\n10\n11\n8\n－预置知识库：一键扫描语料目录下全部‘.txt）建库（中文版与英文版各一套，见「数据说明」）",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 131301.png",
+      "name": "屏幕截图 2026-11-06 131301.png",
+      "lines": 49,
+      "ocr_score": 0.98,
+      "text": " python-doc-rag\n在 python-doc-\nQ\n排序\n三查看\n详细信息\n名称\n修改日期\n类型\n大小\n·git\n2026/11/6 13:10\n文件夹\n.idea\n2026/11/5 22:08\n文件夹\n.streamlit\n2026/10/14 9:43\n文件夹\n_pycache_\n2026/11/5 19:43\n文件夹\ndb\n2026/11/5 19:48\n文件夹\ndocs\n2026/10/13 22:22\n文件夹\ndocs_zh\n2026/11/4 14:54\n文件夹\nsrc\n2026/10/29 12:50\n文件夹\ntools\n2026/11/5 19:43\n文件夹\nvenv\n2026/10/27 20:27\n文件夹\n.env\n2026/10/29 11:09\nMaya Environme...\n.env.example\n2026/10/14 9:43\nEXAMPLE文件\n-gitattributes\n2026/11/6 13:12\nGITATTRIBUTES ...",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 131711.png",
+      "name": "屏幕截图 2026-11-06 131711.png",
+      "lines": 1,
+      "ocr_score": 0.982,
+      "text": "An updated version of GitHub Desktop is available and will be installed at the next launch. See what's new or restart GitHub Desktop.",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133016.png",
+      "name": "屏幕截图 2026-11-06 133016.png",
+      "lines": 11,
+      "ocr_score": 0.85,
+      "text": "VESTUP\"\nULTRA系列\n无缝健身衣\nD版型\n多面弹力\n透气新返\n综\nVESTUP【ULTRA无缝显大长袖】\n半门襟纹理感弹力透气圆领男装T\n￥104￥130\n已抢6320件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133031.png",
+      "name": "屏幕截图 2026-11-06 133031.png",
+      "lines": 6,
+      "ocr_score": 0.92,
+      "text": "ZZLSHIJIA\n加棉加厚\nZ·L·SHIJIA/战狼世家情侣石墨\n烯保暖棉衣冬季防风保暖户外棉衣\n¥67.8?569\n总售3539件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133502.png",
+      "name": "屏幕截图 2026-11-06 133502.png",
+      "lines": 7,
+      "ocr_score": 0.983,
+      "text": "MIANZHI\n纯棉\n阔腿裤\n【棉致】美式纯棉工装裤男款宽松\n直筒2026春秋季新款阔腿休闲长裤\n￥62.5￥130\n已抢3954件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133513.png",
+      "name": "屏幕截图 2026-11-06 133513.png",
+      "lines": 6,
+      "ocr_score": 0.971,
+      "text": "JASONWOOD\n坚持我的\nJASONWOOD重磅立领双开拉链开\n衫毛衣男秋季潮牌高级感针织衫外\n￥78￥200\n已抢9432件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133523.png",
+      "name": "屏幕截图 2026-11-06 133523.png",
+      "lines": 46,
+      "ocr_score": 0.961,
+      "text": "拼多多\n首页」拼多多商家入驻「热点资讯「社会招聘」校园招聘「招采平台」帮助中心「举报平台丨分享赚钱「查快递\n简体中文\n拼着买·才便宜\n女装\n男装\n医药\n美食\n鞋包\n百货\n美妆\n电器\n母婴\n家纺\n运动\n海淘\n多多买菜\nJASONWOOD\nVESTUP\nFAZLSHIJIA\nMIANZHI\n坚持我\nULTRA系列\n无缝健身衣\n纯棉\n阔腿裤\n版型\nBM\nVESTUP【ULTRA无缝显大长袖】\nZ·L·SHIJIA/战狼世家情侣石墨\n【棉致】美式纯棉工装裤男款宽松\nJASONWOOD重磅立领双开拉链开\n半门襟纹理感弹力透气圆领男装T\n烯保暖棉衣冬季防风保暖户外棉衣\n直筒2026春秋季新款阔腿休闲长裤\n衫毛衣男秋季潮牌高级感针织衫外\n￥104￥130\n已抢6320件\n￥67.8￥569\n总售3539件\n￥62.5￥130\n已抢3954件\n￥78￥200\n已抢9432件\nEZLSHIJIA\nTonyieans",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133535.png",
+      "name": "屏幕截图 2026-11-06 133535.png",
+      "lines": 6,
+      "ocr_score": 0.92,
+      "text": "SEPTWOIVES\n区克专\n七匹狼2025秋季新款翻领春秋夹克\n百搭工装休闲商务上衣外套男装\n¥238￥1199\n已抢460件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133551.png",
+      "name": "屏幕截图 2026-11-06 133551.png",
+      "lines": 5,
+      "ocr_score": 0.968,
+      "text": "ZZLSHIJA\n战狼世家男士冬季加绒加厚新款马\n甲无袖保暖坎肩工装爸爸背心外套\n￥99￥199\n已抢48件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133634.png",
+      "name": "屏幕截图 2026-11-06 133634.png",
+      "lines": 7,
+      "ocr_score": 0.923,
+      "text": "HOOOEE\n全羊毛·费尔岛提花\n旭感细腻柔软亲肤\n【470g重磅羊毛】红豆秋冬费尔岛\n提花打底加厚男士针织保暖羊毛衫\n￥470￥1399\n已抢671件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133648.png",
+      "name": "屏幕截图 2026-11-06 133648.png",
+      "lines": 6,
+      "ocr_score": 0.923,
+      "text": "DABAISHA\nCINCC 1ATG\n大白鲨国潮拼接皮衣男女春秋季时\n尚潮流外套情侣痞帅宽松棒球夹克\n￥138￥210\n已抢1241件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133701.png",
+      "name": "屏幕截图 2026-11-06 133701.png",
+      "lines": 6,
+      "ocr_score": 0.947,
+      "text": "Swamp\narea\"\n可收腰连帽户外冲锋风衣男春季帅\n气中长款大衣夹克韩版外套潮\n￥168￥360\n已抢571件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133757.png",
+      "name": "屏幕截图 2026-11-06 133757.png",
+      "lines": 0,
+      "ocr_score": 0.0,
+      "text": "",
+      "rule_hits": [],
+      "risk": "unknown"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133805.png",
+      "name": "屏幕截图 2026-11-06 133805.png",
+      "lines": 9,
+      "ocr_score": 0.884,
+      "text": "包方\nadidas\n防派淀面料\n官方正品\n假一罚十\nadidas阿迪达斯立领男士夹克秋季\n美式复古新款梭织运动外套KZ0724\n￥345￥497\n已抢545件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133814.png",
+      "name": "屏幕截图 2026-11-06 133814.png",
+      "lines": 5,
+      "ocr_score": 0.97,
+      "text": "Jeep.\nJEEP吉普美式假两件卫衣男士秋季\n新款高级设计感慵懒套头长袖上衣\n￥119￥1499\n已抢465件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133825.png",
+      "name": "屏幕截图 2026-11-06 133825.png",
+      "lines": 6,
+      "ocr_score": 0.931,
+      "text": "又中量\nSMOWFLYNIG\n雪中飞男士轻薄羽绒羽绒服短款男\n女同款秋冬新款休闲百搭轻便外套\n￥138￥260\n已抢19件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133838.png",
+      "name": "屏幕截图 2026-11-06 133838.png",
+      "lines": 4,
+      "ocr_score": 0.976,
+      "text": "马登工装美式复古千鸟格哈灵顿G9\n立领夹克老钱风哈林顿外套男秋\n¥208.9￥360.9\n已抢401件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133848.png",
+      "name": "屏幕截图 2026-11-06 133848.png",
+      "lines": 10,
+      "ocr_score": 0.959,
+      "text": "YUZHAOLIN\n俞兆林\n雪尼尔面料\n两个内口装\n加绒\n加厚\n俞兆林新款冬季立领夹克加厚加绒\n爸爸外套男士中老年人爷爷雪尼尔\n￥81.5?288\n总售499件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133854.png",
+      "name": "屏幕截图 2026-11-06 133854.png",
+      "lines": 7,
+      "ocr_score": 0.944,
+      "text": "回力\n冰丝凉感\nNJLEIEGLOR\n回力夏季速干背心男款冰丝透气吸\n汗男士无袖t恤防晒健身运动汗衫\n￥29.9￥199\n已抢2039件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133902.png",
+      "name": "屏幕截图 2026-11-06 133902.png",
+      "lines": 5,
+      "ocr_score": 0.98,
+      "text": "HAPPYHEART\n查尔斯桃心2025新款连帽棉衣男冬\n季加厚爱心刺绣情侣棉服微短外套\n￥209￥1227\n已抢1039件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133912.png",
+      "name": "屏幕截图 2026-11-06 133912.png",
+      "lines": 6,
+      "ocr_score": 0.975,
+      "text": "JASONWOOD\n坚持我的\nJASONWOOD美式复古连帽针织开\n衫男秋季慵懒风cleanfit休闲毛衣\n¥99.99?192\n已抢368件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133923.png",
+      "name": "屏幕截图 2026-11-06 133923.png",
+      "lines": 6,
+      "ocr_score": 0.904,
+      "text": "与狼共舞\nFARTINTPTLTES\n【户外风】与狼共舞连帽夹克男装\n2026秋季款休闲通勤防风外套\n￥199￥1399\n已抢400件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133946.png",
+      "name": "屏幕截图 2026-11-06 133946.png",
+      "lines": 5,
+      "ocr_score": 0.955,
+      "text": "SJVAO\n白灰色三条杠条纹卫裤男款秋冬季\n加绒加厚裤子宽松直筒休闲运动裤\n¥75.8￥112.99\n已抢349件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 133956.png",
+      "name": "屏幕截图 2026-11-06 133956.png",
+      "lines": 5,
+      "ocr_score": 0.968,
+      "text": "DABAISHA\n大白鲨100%棉长袖t恤男春秋薄款\n纯棉休闲立领体恤衫纯色打底衫\n￥58￥190\n已抢664件",
+      "rule_hits": [
+        {
+          "cat": "极限词",
+          "match": "100%"
+        }
+      ],
+      "risk": "medium"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 134106.png",
+      "name": "屏幕截图 2026-11-06 134106.png",
+      "lines": 4,
+      "ocr_score": 0.968,
+      "text": "浅色高腰阔腿微喇牛仔裤女2025春\n季流行爆款显瘦宽松直筒喇叭裤子\n¥59.89?599\n已抢758件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 134116.png",
+      "name": "屏幕截图 2026-11-06 134116.png",
+      "lines": 5,
+      "ocr_score": 0.977,
+      "text": "KUSIMA\n库思玛军绿色复古星星刺绣牛仔裤\n女秋新款高腰直筒宽松显瘦阔腿裤\n¥99.87￥199\n已抢603件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 134135.png",
+      "name": "屏幕截图 2026-11-06 134135.png",
+      "lines": 11,
+      "ocr_score": 0.829,
+      "text": "选自好品质好面料\n回力\ntteninpi-paiyhksc!\n公\n全庆话\nWARRIOK/力\nWHEET THT C.ASSES 7INNCVRTI ANN EEVILS9\n回力浅蓝色卫衣外套女春季薄款\n2026新款拉链开衫休闲运动上衣服\n￥79.9￥240\n已抢1207件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 134144.png",
+      "name": "屏幕截图 2026-11-06 134144.png",
+      "lines": 5,
+      "ocr_score": 0.953,
+      "text": "正BO品\n美式卡其色微喇牛仔裤女2026秋季\n新款高腰修身显瘦不贴腿喇叭裤子\n¥69.8￥699\n已抢570件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 134149.png",
+      "name": "屏幕截图 2026-11-06 134149.png",
+      "lines": 5,
+      "ocr_score": 0.954,
+      "text": "RARNI\nRARN/热爱如你2026夏季运动短裙\n女休闲百搭防走光网球健身半身裙\n¥67.9￥299\n总售7032件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 134203.png",
+      "name": "屏幕截图 2026-11-06 134203.png",
+      "lines": 5,
+      "ocr_score": 0.969,
+      "text": "LIEBO裂帛\n黑色窄版直筒裤女春秋款胖mm大\n码高腰显瘦裤子小个子牛仔裤烟管\n¥69.8￥799\n总售514件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 134224.png",
+      "name": "屏幕截图 2026-11-06 134224.png",
+      "lines": 5,
+      "ocr_score": 0.91,
+      "text": "三EE7E\nEBENB新中式马甲上衣新中式盘扣\n马夹马甲女装2026年新款国风新年\n￥57.7￥309\n已抢861件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135244.png",
+      "name": "屏幕截图 2026-11-06 135244.png",
+      "lines": 10,
+      "ocr_score": 0.915,
+      "text": "福茗源\n杨茗源\n金骏\nJIN JUN MEICHA\n眉茶\n24\n福茗源特级蜜香金骏眉新茶正宗高\n山高品质蜜香养胃红茶袋装\n￥28￥143\n已抢1389袋",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135250.png",
+      "name": "屏幕截图 2026-11-06 135250.png",
+      "lines": 21,
+      "ocr_score": 0.923,
+      "text": "西泰\n高纤黑麦\nSAANLL\n燕麦片\n高纤黑麦\n澳洲进口燕支\n谷物燕麦片\n西壹\n高纤黑麦\n12.8\n12.3\n燕麦片\n12.8g12.3g\n1kg装+1kg装\n官旗发货\n官方正品正品保障现货连发\n高蛋白质高膳食纤维\n西麦高纤黑麦谷物燕麦片2000g营\n养即食早餐代餐冲饮西麦燕麦片\n￥32.7￥100\n已抢1506件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135259.png",
+      "name": "屏幕截图 2026-11-06 135259.png",
+      "lines": 13,
+      "ocr_score": 0.872,
+      "text": "厂优品\nDOEEICEATNISS\n非转基园大豆\n厂晒\n原味豆浆粉\n风味圆体饮料\n口味\n多样化\n净：g\n广禧原味豆浆粉1kg原味茉莉花冰\n豆奶商用速溶冲饮早餐店专用\n¥23.69￥36\n总售6.9万+件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135311.png",
+      "name": "屏幕截图 2026-11-06 135311.png",
+      "lines": 14,
+      "ocr_score": 0.927,
+      "text": "品质生鲜\n质量承诺\n品质精选品质潮源\n产品名称\n带卡利\n地\n山东潍坊\n单甲果量\n550-700g\n（商超品质】\n正宗潍坊希卡利水果\n萝卜净重5斤甜脆新鲜可生吃\n￥10.8￥46\n已抢7340斤",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135328.png",
+      "name": "屏幕截图 2026-11-06 135328.png",
+      "lines": 13,
+      "ocr_score": 0.951,
+      "text": "心\n金字\n上市公司\n老字号品牌\n公混火腿片\n立即\n金华火片196g\n抢购\n煲汤提鲜一餐一袋\n金字公记金华火腿切片196g多包厂\n家无骨煲汤料食材浙江特产腊味\n¥28.6￥60\n已抢1.9万+包",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135410.png",
+      "name": "屏幕截图 2026-11-06 135410.png",
+      "lines": 17,
+      "ocr_score": 0.923,
+      "text": "官方旗舰店\n双喜婚庆糖\n阿尔单斯\n喜庆包装\n使用进口奶源\n尽情分享好滋味\n鑫\n囍\n鑫\n官方\n焦香原味顺滑浓郁\n正品\n阿尔卑斯双喜硬糖\n阿尔卑斯喜糖330g袋喜庆结婚硬糖\n焦香原味牛奶儿糖果年货休闲零食\n￥15.8￥100\n已抢2481袋",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135419.png",
+      "name": "屏幕截图 2026-11-06 135419.png",
+      "lines": 15,
+      "ocr_score": 0.928,
+      "text": "之坊\n食品粮泊官方旗舰店\n3袋\n有机认证\n有机\n鲜米\n有机\n原生\n有机胚芽米/留胚率90%\n好营养\n鲜胚营养香甜软糯\n燕之坊有机臻鲜胚芽米3袋大米粥\n米糙米粳米东北粗杂粮儿童早餐粥\n￥31.2￥71.9\n已抢2.5万+斤",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135452.png",
+      "name": "屏幕截图 2026-11-06 135452.png",
+      "lines": 18,
+      "ocr_score": 0.871,
+      "text": "Sinocare\n医院同款\n三若\nSinocare\nEA-9血糖仪\nSinocare三福\nEA-9型\n元00\n-29\n85\n15-194t\n采血少速度快更稳定\n准\n操作简单准确\n三诺EA-9家用血糖仪器医用高精准\n测血糖仪器语音血糖仪试血糖试纸\n￥82.2￥126\n已抢2712件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135502.png",
+      "name": "屏幕截图 2026-11-06 135502.png",
+      "lines": 22,
+      "ocr_score": 0.897,
+      "text": "倍府\nDamar.\n欧洲百年药企品牌\n儿童&成人恋后肌肤更友好\n宝宝专用\n温和修复\nOSI\n碰牌伤\nDermetix\n蚊虫叮咬\nFDA\n家庭药箱\n下单立享\n1\n官方\n痕儿童坛制润胶7g\n正品\n百年药企实力全球医生临床验证\nDermatix倍舒痕7g+2g儿童专用硅\n凝胶温和修复无刺激正品原装进口\n￥139￥601\n已抢924件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135516.png",
+      "name": "屏幕截图 2026-11-06 135516.png",
+      "lines": 12,
+      "ocr_score": 0.977,
+      "text": "海氏海诺\n官方正品\n面罩式\n便携式氧气瓶\n家庭氧疗\n孕期补氧\n高原旅行\n1000mL\n海氏海诺便携式氧气瓶家用老人孕\n妇户外旅游高原缺氧用小型氧气罐\n￥15.2?45\n已抢1.1万+件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135522.png",
+      "name": "屏幕截图 2026-11-06 135522.png",
+      "lines": 16,
+      "ocr_score": 0.929,
+      "text": "HYNAUT\n海氏海诺\n医用热敷眼罩\n蒸汽热敷\nAOIIM\nBATIH\n独立包装\n11\n片盒\n持久热敷>30min\n缓解干眼症症状\n【海氏海诺】\n医用热敷蒸汽眼罩舒\n缓眼部遮光学生上班族熬夜一次性\n￥17.9￥86\n已抢1329件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135531.png",
+      "name": "屏幕截图 2026-11-06 135531.png",
+      "lines": 15,
+      "ocr_score": 0.92,
+      "text": "巨子生物\n可复美\nGNIIRGN\n皮炎湿疹\n敏感肌肤\n敏感性肌肤、皮肤干燥症、皮肤混疫、激光治疗术后\n4支\n美\n官方正品\n24现货理发\n肌肤有问题就找可复美\n可复美修复乳R乳敷料重组胶原蛋\n白皮炎湿疹屏障修复敏感肌4支正\n¥24.5￥91\n已抢1839件",
+      "rule_hits": [
+        {
+          "cat": "医疗功效",
+          "match": "治疗"
+        }
+      ],
+      "risk": "high"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135545.png",
+      "name": "屏幕截图 2026-11-06 135545.png",
+      "lines": 15,
+      "ocr_score": 0.958,
+      "text": "可\n上市品牌\n医用同款\n额耳双测\n358\"\n精度0.1°℃\n药房同款\n大屏显示\n三色背光\n60天包退换不准可退\n【可孚】\n耳温枪耳朵温度计测温耳\n温检测器高精度医用红外线宝宝\n￥63.8￥160\n已抢7.3万+件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135650.png",
+      "name": "屏幕截图 2026-11-06 135650.png",
+      "lines": 19,
+      "ocr_score": 0.932,
+      "text": "FREDA\n药\nALVA\n官方正品\n内源焕活28天细腻透亮\n深透保湿唤醒肌肤修护力\n内源焕活厚筑屏障\n重构皮肤坚实屏障\n全肤质\n适月\n官方\n关注店道优先发货\n正品\n防伪查验\n品牌授权\n瑷尔博士益生菌面霜2.0补水保湿修\n护屏障改善滋润肌肤皮肤化妆品\n￥44￥160\n总售8712件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135700.png",
+      "name": "屏幕截图 2026-11-06 135700.png",
+      "lines": 12,
+      "ocr_score": 0.902,
+      "text": "水凝保湿水乳两件套\n补水保湿一套搞定\n润泽滋荠|有效补水\nDAINY\n221504\n正品保证\n-100%正品证\n老牌国货口碑力荐\n大宝水凝精华水乳套装清爽补水滋\n润男女学生基础护肤两件套\n￥31.2￥80.9\n总售10.1万+件",
+      "rule_hits": [
+        {
+          "cat": "极限词",
+          "match": "100%"
+        }
+      ],
+      "risk": "medium"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135749.png",
+      "name": "屏幕截图 2026-11-06 135749.png",
+      "lines": 12,
+      "ocr_score": 0.96,
+      "text": "JUDYDALL\n正品保证\n一陪十\n顺滑不易断持久好上手\n朵砍刀眼线胶笔\n第三代\n24H发货\n第三代眼线胶笔\n橘朵精准描绘眼线胶笔防水防蹭持\n久不晕染第三代上手贴合全眼轮廓\n￥29.8￥42\n已抢1.3万+件",
+      "rule_hits": [],
+      "risk": "low"
+    },
+    {
+      "source": "F:\\Pictures\\Screenshots\\屏幕截图 2026-11-06 135803.png",
+      "name": "屏幕截图 2026-11-06 135803.png",
+      "lines": 8,
+      "ocr_score": 0.918,
+      "text": "泊本敏感的安心之选\n洗卸合一\n深度清洁\nben\n泊本蜂蜜洁颜蜜舒缓肌肤温和不红\n脸清洁学生平价敏感肌洗面奶\n¥69￥110\n已抢1.1万+件",
+      "rule_hits": [],
+      "risk": "low"
+    }
+  ]
+}

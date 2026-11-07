@@ -43,7 +43,7 @@ streamlit run app.py                 # 网页界面
 uvicorn src.api:app --port 8000      # HTTP 接口，文档见 http://127.0.0.1:8000/docs
 
 pip install -r requirements-dev.txt
-pytest                              # 76 条单元测试，3 秒跑完，不打网络
+pytest                              # 76 条单元测试，断网可跑，不调 API
 ```
 
 > 必须用 `streamlit run` 启动。直接 `python app.py` 会被启动守卫拦下并给出提示——
@@ -84,7 +84,7 @@ curl -X POST http://127.0.0.1:8000/review -F "file=@data/samples/ad_02.png"
 ## 测试
 
 ```bash
-pytest        # 76 passed in 3.3s
+pytest        # 76 passed
 ```
 
 | 文件 | 覆盖内容 |

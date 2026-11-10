@@ -208,13 +208,49 @@ python tools/eval_real.py --detail   # 打印逐张判定
 - 判定与改写都依赖单次 LLM 调用，没有重试与多模型投票；模型抖动会直接影响结果。
 - 无并发、无性能压测，单机 demo 级。
 
- 9. 未来方向
+## 9. 目录
+
+​```text
+ai-content-guard/
+├── app.py                Streamlit 界面
+├── pytest.ini
+├── requirements.txt
+├── requirements-dev.txt
+├── src/
+│   ├── config.py         常量：词表路径、轮次上限、时间预算
+│   ├── ocr.py            RapidOCR 封装（单例）
+│   ├── rules.py          归一化 + 词表 + 正则 + 上下文排除
+│   ├── judge.py          大模型判定 + 两层合并（取严）
+│   ├── pipeline.py       主链路 detect()：OCR → 判定
+│   ├── agent.py          Agent 循环改写 + RoundLog
+│   ├── rewrite.py        DeepSeek 改写调用
+│   ├── jsonutil.py       LLM 返回 JSON 的容错解析
+│   ├── evaluate.py       评测脚本（--no-llm / --with-rewrite）
+│   ├── logutil.py        日志
+│   └── api.py            FastAPI /review 接口
+├── tools/
+│   ├── make_samples.py   生成 18 张样例图 + 标注
+│   ├── eval_real.py      55 张真实图评测
+│   └── check_fp.py       误报用例复现
+├── data/
+│   ├── lexicon.json      违禁词表（改了立即生效）
+│   ├── samples/          合成样例图
+│   ├── real/             55 张真实图 + 人工标注
+│   └── eval/             误报 / 噪声用例
+├── tests/                76 条单测（断网可跑）
+├── reports/              评测报告输出
+├── docs/                 补充文档
+└── assets/               README 截图
+​```
+
+
+ ##10. 未来方向
 
 1. 把真实集从 55 张扩到 150 张以上（当前 7 条违规，1 条就占 14 个百分点，召回率算不稳），并做第二人交叉标注。真实图引入已完成，卡在样本量和标注可靠性上。
 2. 极限词从「子串匹配」升级为「上下文规则 + LLM 复核」，压掉「最好的售后」这类误报。这一项在产品侧最实，但没有真实分布之前，10 条文案 60% 的误报率只是弱证据，收益要等第 1 步做完才能量化。
 3. 改写结果加二次语义复检（把改写稿再走一遍判定），把「词表零残留」升级成「语义零风险」。
 
- 10. 环境
+ ##11. 环境
 
 | 项 | 版本 |
 | --- | --- |

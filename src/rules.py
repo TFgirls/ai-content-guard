@@ -44,8 +44,7 @@ _LEX_CACHE: Dict[str, object] = {"mtime": None, "data": {}}
 _CONTEXT_EXCLUDE = {
     "100%": {
         # 成分含量、正品承诺，不是"100% 有效"这种绝对化承诺
-        "suffix": ("棉", "丝", "羊毛", "羊绒", "涤纶", "锦纶", "亚麻", "天然", "纯",
-                   "正品", "保证", "原装", "进口"),
+        "suffix": ("棉", "丝", "羊毛", "羊绒", "涤纶", "锦纶", "亚麻", "天然", "纯", "正品", "保证", "原装", "进口"),
         "reason": "数字型成分/正品表述，非绝对化承诺",
     },
     "治疗": {
@@ -101,7 +100,6 @@ def _span(original: str, idx: List[int], start: int, end: int) -> str:
 
 def _norm_word(word: str) -> str:
     return unicodedata.normalize("NFKC", word).strip()
-
 
 def load_lexicon(force: bool = False) -> Dict[str, List[str]]:
     """读词表，按 mtime 失效缓存。"""
